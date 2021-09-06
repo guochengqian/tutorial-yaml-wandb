@@ -1,0 +1,35 @@
+model:  # an object called model.
+  name: assanet # ASSA-Net. THIS IS HOW YOU COMMENT BY #
+  width: 0
+  depth: 2  # you can access this value by: model.depth
+  in_channel: 4
+  activation:
+    type: &type ReLU  # you can use ampersand to anchor one variable
+  sa_config:
+    # *YAML will take care of the data type by itself*
+    npoints: [4096, 1152, 304, 88]  # a list of int
+    radius: [[0.1, 0.2], [0.2, 0.4], [0.4, 0.8], [0.8, 1.6]]  # a list of float list.
+    nsample: [[16, 32], [16, 32], [16, 32], [16, 32]] # a list of int list
+    sample_method: fps
+    mlps: [[[16, 16, 32], [32, 32, 64]],
+           [[64, 64, 128], [64, 96, 128]],
+           [[128, 196, 256], [128, 196, 256]],
+           [[256, 256, 512], [256, 384, 512]]]
+    local_aggregation:
+      feature_type: assa  # this is a string
+      reduction: "mean" # this is also a string
+      type: 'preconv' # this is also a string
+      pre_res: True # residual connetion in PreConv layer. this is a Bool type
+      post_res: True  # residual connetion in PostConv layer
+      layers: 3   # layers = layers of PreConv (before aggregation) + layers of PostConv (after aggregation)
+      post_layers: 1  # number of PostConv layers
+      grouper:
+        method: ball_query
+        normalize_xyz: True
+      conv:
+        method: conv1d
+        use_bn: True
+        activation:
+#          type: ReLU  # you can access this value by: model.sa_config.local_aggregation.conv.activation.type
+           type: *type # in this way, you can make the value of this variable to be the same as the anchor value
+  fp_mlps: [[64, 64], [128, 128], [256, 256], [512, 512]]
