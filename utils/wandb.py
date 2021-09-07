@@ -1,3 +1,7 @@
+"""
+Modified from torch-Points3d: https://github.com/nicolas-chaulet/torch-points3d/blob/master/torch_points3d/utils/wandb_utils.py
+"""
+
 import shutil
 import os
 import subprocess

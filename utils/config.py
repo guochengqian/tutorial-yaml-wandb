@@ -1,3 +1,7 @@
+"""
+Modified from torchpack: https://github.com/zhijian-liu/torchpack/blob/master/torchpack/utils/config.py
+"""
+
 import hashlib
 import json
 import os

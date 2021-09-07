@@ -13,7 +13,7 @@ from torch.utils.tensorboard import SummaryWriter
 def parse_option():
     parser = argparse.ArgumentParser('S3DIS scene-segmentation training')
     parser.add_argument('--cfg', type=str, required=True, help='config file')
-    # parser.add_argument("--local_rank", type=int, help='local rank for DistributedDataParallel')
+    # parser.add_argument("--local_rank", type=int, help='local rank is used for DistributedDataParallel')
     args, opts = parser.parse_known_args()
     config.load(args.cfg, recursive=True)
     config.update(opts)
@@ -87,6 +87,7 @@ def main(config):
 if __name__ == "__main__":
     opt, config = parse_option()
 
+    # YAML is organized into an easy dictionary.
     local_aggregation_cfg = config.model.sa_config.local_aggregation
     tags = [config.data.datasets,
             'train',
