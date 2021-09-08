@@ -206,9 +206,8 @@ Please check `yaml_wandb_example.py` for details, basically you do the following
 5. run the main file by: 
 
    ```
-   python yaml_wandb_example.py wandb.entity xxxxx wandb.use_wandb True
+   python yaml_wandb_example.py --cfg cfgs/s3dis/assanet.yaml wandb.entity xxxxx wandb.use_wandb True
    ```
-
    xxxx is your wandb account
 
 6. now, go to your project page in wandb, you should be able to see this run of your experiment
